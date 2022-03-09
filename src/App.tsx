@@ -1,24 +1,12 @@
-import { useEfetch } from './hooks/useFetch';
+import { Route, Routes } from "react-router-dom"
+import { Repo } from "./pages/repo"
+import { Repos } from "./pages/repos"
 
-interface Repository {
-  full_name: string;
-  description: string;
-}
-
-function App() {
-
-  const { data: repositories } = useEfetch<Repository[]>('https://api.github.com/users/matheussesh/repos')
-
-  return (
-    <ul>{repositories?.map(repo => {
-      return(
-        <li>{repo.full_name}
-          <strong>{repo.full_name}</strong>
-          <p>{repo.description}</p>
-        </li>
-      )
-    })}</ul>
+export function App() {
+  return(
+    <Routes>
+      <Route path="/" element={<Repos />} />
+      <Route path="/repos/*" element={<Repo />} />
+    </Routes>
   )
 }
-
-export default App
